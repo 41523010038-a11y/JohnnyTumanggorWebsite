@@ -1,0 +1,44 @@
+/* Custom overrides (optional) */
+:root {
+  color-scheme: light dark;
+}
+
+/* Improve focus ring visibility */
+:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme changes */
+html,
+body,
+header,
+section,
+footer {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+
+/* Scroll reveal: fade-in and move-up */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal--visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
