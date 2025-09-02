@@ -87,16 +87,56 @@
   </section>
 
   <!-- About -->
-  <section id="about" class="border-t border-gray-100 dark:border-gray-800">
+  <section id="about" class="border-t border-gray-100 dark:border-red-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <h2 class="text-2xl md:text-3xl font-bold mb-6">Tentang Saya</h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Saya seorang penyanyi lepas yang aktif mengunggah video dan foto bernyanyi di Facebook. Konten saya, seperti cover lagu atau penampilan live, mencerminkan hobi dan passion saya. Dengan gaya autentik, saya menghibur audiens dan berbagi kreativitas musik saya di platform tersebut.</p>
     </div>
   </section>
 
+  <!-- Favorite Songs -->
+  <section id="songs" class="border-t border-gray-100 dark:border-red-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Lagu Favorit</h2>
+        <a href="#" class="inline text-primary hover:underline" onclick="event.preventDefault(); document.getElementById('songs').scrollIntoView({behavior:'smooth'});">Scroll ke sini →</a>
+      </div>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">Berikut ini saya berikan beberapa lagu yang saya cukup sukai dan sering saya dengar. Klik untuk membuka tautan lagu.</p>
+      <div id="songsGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Diisi via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Bird Hobby Slider -->
+  <section id="hobby" class="border-t border-gray-100 dark:border-red-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Hobi: Burung</h2>
+      </div>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">Beberapa foto burung kesukaan saya. Gunakan tombol untuk melihat gambar berikutnya atau sebelumnya.</p>
+
+      <div class="relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+        <div class="aspect-[16/9] bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+          <img id="birdSlideImage" src="images/proyek-1.jpeg" alt="Burung" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+
+        <!-- Controls -->
+        <button id="birdPrev" aria-label="Sebelumnya" class="absolute left-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-10 w-10 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+        </button>
+        <button id="birdNext" aria-label="Berikutnya" class="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-10 w-10 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M8.25 4.5 15.75 12l-7.5 7.5"/></svg>
+        </button>
+
+        <!-- Indicators -->
+        <div id="birdIndicators" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- Projects -->
-  <section id="projects" class="border-t border-gray-100 dark:border-gray-800">
+  <section id="projects" class="border-t border-gray-100 dark:border-red-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <div class="flex items-end justify-between mb-6">
         <h2 class="text-2xl md:text-3xl font-bold">Proyek</h2>

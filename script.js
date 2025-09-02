@@ -225,3 +225,164 @@ window.fbAsyncInit = function() {
   targets.forEach((el) => observer.observe(el));
 })();
 
+// ---------- Favorite Songs Cards ----------
+const favoriteSongs = [
+  {
+    title: 'Cinta Luar Biasa - Andmesh',
+    artist: 'Andmesh Kamaleng',
+    link: 'https://open.spotify.com/search/cinta%20luar%20biasa%20andmesh',
+    image: 'images/proyek-4.png',
+  },
+  {
+    title: 'Hanya Rindu - Andmesh',
+    artist: 'Andmesh Kamaleng',
+    link: 'https://open.spotify.com/search/hanya%20rindu%20andmesh',
+    image: 'images/proyek-5.png',
+  },
+  {
+    title: 'Perfect - Ed Sheeran',
+    artist: 'Ed Sheeran',
+    link: 'https://open.spotify.com/search/perfect%20ed%20sheeran',
+  },
+  {
+    title: 'Zombie - The Cranberries',
+    artist: 'The Cranberries',
+    link: 'https://open.spotify.com/search/zombie',
+  }
+];
+
+const songsGrid = document.getElementById('songsGrid');
+if (songsGrid) {
+  if (favoriteSongs.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'col-span-full text-center text-sm text-gray-500 dark:text-gray-400';
+    empty.textContent = 'Belum ada lagu favorit. Nanti akan ditambahkan.';
+    songsGrid.appendChild(empty);
+  } else {
+    favoriteSongs.forEach((song) => {
+      const card = document.createElement('article');
+      card.className = 'group rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex flex-col';
+
+      if (song.image) {
+        const media = document.createElement('div');
+        media.className = 'h-40 bg-gray-200 dark:bg-gray-800';
+        const img = document.createElement('img');
+        img.src = song.image;
+        img.alt = song.title || 'Cover lagu';
+        img.loading = 'lazy';
+        img.className = 'w-full h-full object-cover';
+        media.appendChild(img);
+        card.appendChild(media);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'p-4 flex flex-col gap-2';
+
+      const title = document.createElement('h3');
+      title.className = 'font-semibold group-hover:text-primary transition-colors';
+      title.textContent = song.title;
+
+      const meta = document.createElement('p');
+      meta.className = 'text-sm text-gray-600 dark:text-gray-300';
+      meta.textContent = song.artist;
+
+      const action = document.createElement('a');
+      action.href = song.link;
+      action.target = '_blank';
+      action.rel = 'noopener';
+      action.className = 'mt-1 inline-flex items-center text-primary hover:underline text-sm';
+      action.textContent = 'Dengarkan →';
+
+      body.appendChild(title);
+      body.appendChild(meta);
+      body.appendChild(action);
+
+      card.appendChild(body);
+      songsGrid.appendChild(card);
+    });
+  }
+}
+
+// ---------- Bird Hobby Slider ----------
+(function initBirdSlider() {
+  const images = [
+    'images/burungSatu.jpg',
+    'images/burungDua.jpg',
+    'images/burungTiga.jpg',
+    'images/proyek-4.jpeg',
+    'images/proyek-5.jpeg',
+  ];
+
+  const imgEl = document.getElementById('birdSlideImage');
+  const prevBtn = document.getElementById('birdPrev');
+  const nextBtn = document.getElementById('birdNext');
+  const indicators = document.getElementById('birdIndicators');
+  if (!imgEl || !prevBtn || !nextBtn || !indicators || images.length === 0) return;
+
+  let current = 0;
+
+  const render = () => {
+    imgEl.src = images[current];
+    Array.from(indicators.children).forEach((dot, i) => {
+      if (i === current) {
+        dot.className = 'h-2 w-2 rounded-full bg-primary';
+      } else {
+        dot.className = 'h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600';
+      }
+    });
+  };
+
+  // Build indicators
+  indicators.innerHTML = '';
+  images.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.className = 'h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-600';
+    dot.addEventListener('click', () => {
+      current = i;
+      render();
+    });
+    indicators.appendChild(dot);
+  });
+
+  const goPrev = () => {
+    current = (current - 1 + images.length) % images.length;
+    render();
+  };
+  const goNext = () => {
+    current = (current + 1) % images.length;
+    render();
+  };
+
+  prevBtn.addEventListener('click', goPrev);
+  nextBtn.addEventListener('click', goNext);
+
+  // Basic keyboard support when focused within the section
+  const hobbySection = document.getElementById('hobby');
+  if (hobbySection) {
+    hobbySection.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goPrev();
+      else if (e.key === 'ArrowRight') goNext();
+    });
+    hobbySection.tabIndex = 0; // make focusable
+  }
+
+  // Basic swipe support (touch)
+  let startX = null;
+  imgEl.addEventListener('touchstart', (e) => {
+    startX = e.touches && e.touches.length ? e.touches[0].clientX : null;
+  });
+  imgEl.addEventListener('touchend', (e) => {
+    if (startX == null) return;
+    const endX = e.changedTouches && e.changedTouches.length ? e.changedTouches[0].clientX : startX;
+    const dx = endX - startX;
+    if (Math.abs(dx) > 40) {
+      if (dx > 0) goPrev(); else goNext();
+    }
+    startX = null;
+  });
+
+  render();
+})();
+
